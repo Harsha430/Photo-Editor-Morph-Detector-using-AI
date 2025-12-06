@@ -77,6 +77,25 @@ outputs/*/
 test_*.jpg
 test_*.png
 
+# Test and debug files
+test_*.py
+simple_*.py
+ateeqq_only_detector.py
+setup_project.py
+verify_morph_detector.py
+*_debug.py
+*_test.py
+
+# Extra documentation and HTML files
+ieee*.html
+IMPLEMENTATION_COMPLETE.md
+MORPH_DETECTOR_IMPLEMENTATION.md
+DOWNLOAD_FIX.md
+FIXES_COMPLETED.md
+AI_DETECTION_FIX_GUIDE.md
+QUICK_FIX_SUMMARY.md
+AI_DETECTION_FIX_SUCCESS.md
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
