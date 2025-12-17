@@ -13,11 +13,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from PIL import Image
 
-# Try to import the working Ateeqq detector
+# Try to import the Ateeqq detector (the only one that works locally)
 try:
     from ateeqq_final_working import AteeqqFinalWorking
     AI_DETECTOR_AVAILABLE = True
-    print("✅ Working Ateeqq detector module available")
+    print("✅ Ateeqq detector module available")
 except ImportError as e:
     AI_DETECTOR_AVAILABLE = False
     print(f"⚠️  Ateeqq detector not available: {e}")
@@ -79,19 +79,18 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-# Initialize the working Ateeqq detector
+# Initialize the Ateeqq detector
 ai_detector = None
-print("🔄 Initializing working Ateeqq detector...")
+print("🔄 Initializing Ateeqq detector...")
 
 if AI_DETECTOR_AVAILABLE:
     try:
-        print("📥 Loading working Ateeqq detector (using real model)...")
-        # Use threshold=0.95 for VERY strict detection (avoid false positives)
-        # Only flag images as AI if model is >95% confident
-        ai_detector = AteeqqFinalWorking(ai_threshold=0.95)
+        print("📥 Loading Ateeqq AI detector...")
+        ai_detector = AteeqqFinalWorking(ai_threshold=0.50)
         if hasattr(ai_detector, 'model_loaded') and ai_detector.model_loaded:
-            print("✅ Working Ateeqq detector initialized successfully!")
-            print(f"   AI Detection Threshold: 95% (very strict - favors real photos)")
+            print("✅ Ateeqq detector initialized successfully!")
+            print(f"   Model: Ateeqq/ai-vs-human-image-detector")
+            print(f"   Threshold: 50%")
         else:
             print("⚠️  Ateeqq detector failed to load, using simulation")
             ai_detector = None

@@ -151,3 +151,4 @@ frontend/.cache/
 !models/ai-vs-human-image-detector/README.md
 !uploads/.gitkeep
 !outputs/.gitkeep
+models/
