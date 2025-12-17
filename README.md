@@ -1,346 +1,225 @@
-# Smart Image Preparation Tool 🎨
+# Photo Editor Morph Detector using AI
 
-A comprehensive AI-powered image preparation toolkit with a professional React frontend and Python backend. Perfect for social media creators who need professional-quality image processing with complete privacy and offline operation.
+A full-stack AI-powered image processing application with AI detection, background removal, and morph detection capabilities.
 
-## 🌟 Features
+## Features
 
-### 🔍 Smart Cropping with Content Preservation
-- **AI Object Detection** - Uses YOLOv8 to detect main subjects
-- **Intelligent Cropping** - Crops to target aspect ratios without cutting off subjects
-- **Smart Padding** - Uses padding instead of cropping when subjects would be lost
-- **Multiple Formats** - Supports 1:1, 9:16, 16:9 and custom aspect ratios
+- **AI Detection**: Detect if an image is AI-generated or a real photo using the Ateeqq/ai-vs-human-image-detector model
+- **Background Removal**: Remove backgrounds from images with optimized GrabCut algorithm
+- **Morph Detection**: Analyze images for signs of morphing/editing using multi-analysis techniques
+- **Modern UI**: React-based frontend with beautiful, responsive design
 
-### 🧠 AI Image Enlargement / Outpainting
-- **Stable Diffusion Powered** - Uses Stable Diffusion 2 Inpainting for extensions
-- **Style Preservation** - Maintains original style and content seamlessly
-- **Custom Prompts** - Control the style of generated extensions
-- **Aspect Ratio Fitting** - Extend to specific aspect ratios automatically
+## Tech Stack
 
-### ✍️ Smart Text Overlay
-- **Subject-Aware Placement** - Automatically avoids covering main subjects
-- **Auto-Contrast** - Adjusts text color for optimal readability
-- **Behind Subject Mode** - Place text behind subjects using AI segmentation
-- **Full Customization** - Fonts, colors, sizes, and positioning
+### Backend
+- **Python 3.8+**
+- **FastAPI** - High-performance web framework
+- **PyTorch** - Deep learning framework
+- **Transformers** - Hugging Face model library
+- **OpenCV** - Image processing
+- **Pillow** - Image manipulation
 
-### 🔍 Real vs AI Image Detection
-- **Robust Ensemble** - Uses 4 different Hugging Face models for maximum accuracy
-- **High Confidence** - Ensemble prediction with confidence scoring
-- **Multiple Architectures** - DiT, ViT, and specialized AI detectors
-- **Batch Processing** - Analyze multiple images at once
-- **Format Support** - Works with JPG, PNG, WEBP formats
+### Frontend
+- **React 18** - UI framework
+- **Vite** - Build tool
+- **TailwindCSS** - Styling
+- **Framer Motion** - Animations
 
-### 🕵️ Photo Morph Detection
-- **Advanced Analysis** - Multi-technique approach for detecting morphed/edited images
-- **Compression Analysis** - Detects inconsistent JPEG compression artifacts
-- **Noise Pattern Analysis** - Identifies noise inconsistencies across image regions
-- **Edge Consistency** - Examines edge irregularities and morphing artifacts
-- **Lighting Analysis** - Checks for lighting inconsistencies and gradients
-- **Color Consistency** - Analyzes color distribution patterns for editing signs
-- **Texture Pattern Analysis** - Uses Local Binary Patterns to detect texture irregularities
-- **Percentage Results** - Provides detailed percentage breakdown of morph probability
+## Installation
 
-### 🌐 Professional Web Interface
-- **Modern React Frontend** - Beautiful, responsive web interface
-- **Real-time Preview** - Live image preview with zoom and pan
-- **Drag & Drop Upload** - Intuitive file uploading
-- **Progress Tracking** - Real-time processing progress
-- **Results Management** - Download, share, and manage processed images
+### Prerequisites
+- Python 3.8 or higher
+- Node.js 16 or higher
+- Git
 
-## 🤖 Robust AI Models
+### Backend Setup
 
-This project uses multiple robust Hugging Face models for maximum accuracy and reliability:
-
-### AI Detection Models
-- **Primary**: `umm-maybe/AI-image-detector` - Specialized AI image detector
-- **Secondary**: `Organika/sdxl-detector` - SDXL-specific AI detector
-- **Tertiary**: `microsoft/DiT-base-patch16-224` - DiT architecture
-- **Quaternary**: `google/vit-base-patch16-224` - Vision Transformer
-
-### Inpainting Models
-- **Primary**: `runwayml/stable-diffusion-inpainting` - High-quality inpainting
-- **Secondary**: `stabilityai/stable-diffusion-2-inpainting` - Fallback model
-
-### Object Detection Models
-- **Nano**: `yolov8n.pt` - Fast detection for real-time use
-- **Small**: `yolov8s.pt` - Balanced speed and accuracy
-- **Medium**: `yolov8m.pt` - High accuracy for detailed analysis
-
-All models include robust fallback mechanisms and ensemble prediction for maximum reliability.
-
-## 🚀 Quick Start
-
-### Automated Setup (Recommended)
+1. Clone the repository:
 ```bash
-python setup_project.py
+git clone https://github.com/Harsha430/Photo-Editor-Morph-Detector-using-AI.git
+cd Photo-Editor-Morph-Detector-using-AI
 ```
-This script will automatically:
-- Check requirements
-- Set up Python virtual environment
-- Install all dependencies
-- Set up the React frontend
-- Download AI models
-- Create startup scripts
 
-### Manual Setup
-
-1. **Backend Setup:**
+2. Create and activate virtual environment:
 ```bash
-# Create virtual environment
 python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
+# Windows
+.\venv\Scripts\activate
+# Linux/Mac
 source venv/bin/activate
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Download robust AI models (multiple models for better accuracy)
-python download_models.py
-
-# Test all models to ensure they work
-python test_robust_models.py
 ```
 
-2. **Frontend Setup:**
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Download AI models:
+The Ateeqq AI detection model will be automatically downloaded on first run. Alternatively, you can download it manually:
+```bash
+# The model will be saved to models/ai-vs-human-image-detector/
+# Size: ~354MB
+```
+
+### Frontend Setup
+
+1. Navigate to frontend directory:
 ```bash
 cd frontend
+```
+
+2. Install dependencies:
+```bash
 npm install
 ```
 
-## 🎯 Usage
+## Running the Application
 
-### Start the Application
-
-1. **Start Backend (Terminal 1):**
+### Start Backend Server
 ```bash
-# Windows:
+# From project root
+python api_server_simple.py
+# Or use the batch file (Windows)
 start_backend.bat
-# macOS/Linux:
-./start_backend.sh
-# Or manually:
-python api_server.py
 ```
+Backend will run on: http://localhost:8001
 
-2. **Start Frontend (Terminal 2):**
+### Start Frontend Server
 ```bash
-# Windows:
+# From frontend directory
+npm run dev
+# Or use the batch file (Windows) from project root
 start_frontend.bat
-# macOS/Linux:
-./start_frontend.sh
-# Or manually:
-cd frontend && npm run dev
+```
+Frontend will run on: http://localhost:3000
+
+## Usage
+
+1. Open http://localhost:3000 in your browser
+2. Upload an image
+3. Choose a feature:
+   - **AI Detection**: Analyze if the image is AI-generated
+   - **Background Removal**: Remove the background (outputs PNG with transparency)
+   - **Morph Detection**: Detect if the image has been morphed/edited
+
+## Project Structure
+
+```
+Photo-Editor-Morph-Detector-using-AI/
+├── api_server_simple.py          # Main FastAPI backend server
+├── ateeqq_final_working.py       # AI detection module (Ateeqq model)
+├── background_remover.py         # Background removal (optimized GrabCut)
+├── photo_morph_detector.py       # Morph detection module
+├── utils.py                      # Utility functions
+├── requirements.txt              # Python dependencies
+├── frontend/                     # React frontend application
+│   ├── src/
+│   │   ├── components/          # React components
+│   │   ├── pages/               # Page components
+│   │   ├── services/            # API services
+│   │   └── context/             # React context
+│   ├── package.json
+│   └── vite.config.js
+├── models/                       # AI models (not in git, download separately)
+├── uploads/                      # Uploaded images
+└── outputs/                      # Processed images
 ```
 
-3. **Open Browser:**
-```
-http://localhost:3000
-```
+## AI Models
 
-## 🎮 Using the Web Interface
+### Ateeqq AI Detector
+- **Model**: Ateeqq/ai-vs-human-image-detector
+- **Architecture**: SigLIP (Vision Transformer)
+- **Size**: ~354MB
+- **Accuracy**: Detects AI-generated images vs real photos
+- **Threshold**: 50% (balanced detection)
 
-### Dashboard Features
-- **Image Upload** - Drag & drop or click to upload images
-- **Tool Selection** - Choose from Smart Crop, Outpaint, Text Overlay, AI Detection, or Complete Pipeline
-- **Real-time Settings** - Adjust parameters with live preview
-- **Processing Status** - Track progress with detailed status updates
-- **Results Panel** - View, download, and manage processed images
+### Photo Morph Detector
+- **Type**: Multi-analysis algorithm
+- **Techniques**: Compression analysis, noise patterns, edge consistency, lighting, color, texture
+- **No external model required**
 
-### Command Line Interface (Optional)
+## Performance Optimizations
+
+- **Background Removal**: Automatically resizes large images to max 1024px before processing, then upscales the mask back to original size
+- **GrabCut Iterations**: Reduced from 5 to 3 for faster processing
+- **Result**: Processes large images in seconds instead of minutes
+
+## API Endpoints
+
+- `GET /health` - Health check
+- `POST /upload` - Upload image
+- `POST /ai-detect` - AI detection
+- `POST /morph-detect` - Morph detection
+- `POST /remove-background/{image_id}` - Background removal
+- `GET /uploads/{filename}` - Serve uploaded images
+- `GET /outputs/{filename}` - Serve processed images
+
+## Configuration
+
+### Backend Port
+Default: 8001 (configured in `api_server_simple.py`)
+
+### Frontend Port
+Default: 3000 (configured in `vite.config.js`)
+
+### CORS
+Configured to allow requests from:
+- http://localhost:3000
+- http://localhost:5173
+- http://127.0.0.1:3000
+- http://127.0.0.1:5173
+
+## Troubleshooting
+
+### Model Download Issues
+If the AI model fails to download automatically:
+1. Check your internet connection
+2. Ensure you have ~500MB free disk space
+3. The model will be saved to `models/ai-vs-human-image-detector/`
+
+### Port Already in Use
+If port 8001 or 3000 is already in use:
 ```bash
-# Run comprehensive demo
-python main.py --demo
-
-# Process single image
-python main.py -i image.jpg -a 16:9 -t "Hello World!"
-
-# Complete pipeline
-python main.py -i image.jpg -a 9:16 -t "Social Media Ready!"
+# Windows - Find and kill process
+netstat -ano | findstr :8001
+taskkill /PID <PID> /F
 ```
 
-## Individual Module Usage 🔧
-
-### Smart Cropping
-```python
-from smart_crop import SmartCropper
-
-cropper = SmartCropper()
-result = cropper.smart_crop("image.jpg", "16:9", "output.jpg")
-
-if result['success']:
-    print(f"Cropped: {result['original_size']} -> {result['cropped_size']}")
-    print(f"Main subject: {result['main_subject']['class_name']}")
+### Module Import Errors
+Ensure virtual environment is activated and all dependencies are installed:
+```bash
+pip install -r requirements.txt
 ```
 
-### Outpainting
-```python
-from outpaint_image import ImageOutpainter
+## Known Limitations
 
-outpainter = ImageOutpainter()
-result = outpainter.outpaint_image("image.jpg", extension_factor=1.5, output_path="extended.jpg")
+- **Fork Restriction**: This repository is a fork. Large model files are not stored in git - they must be downloaded separately
+- **Model Compatibility**: Some Hugging Face models (e.g., umm-maybe/AI-image-detector, Organika/sdxl-detector) are not compatible with transformers 4.57.3
+- **GPU Support**: Currently configured for CPU. For GPU support, ensure CUDA-compatible PyTorch is installed
 
-if result['success']:
-    print(f"Extended: {result['original_size']} -> {result['extended_size']}")
-```
+## Contributing
 
-### Text Overlay
-```python
-from add_text_overlay import TextOverlayEngine
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-text_engine = TextOverlayEngine()
-result = text_engine.add_text_overlay(
-    "image.jpg", 
-    "Hello World!",
-    style_options={
-        'font_size': 60,
-        'placement': 'auto',
-        'auto_contrast': True
-    },
-    output_path="with_text.jpg"
-)
-```
+## License
 
-### AI Detection
-```python
-from ai_image_check import AIImageDetector
+This project is open source and available under the MIT License.
 
-detector = AIImageDetector()
-result = detector.check_if_image_is_ai("image.jpg")
+## Acknowledgments
 
-if result['success']:
-    print(f"Prediction: {result['prediction']}")
-    print(f"Confidence: {result['confidence']:.3f}")
-```
+- **Ateeqq** for the AI vs Human image detector model
+- **Hugging Face** for the Transformers library
+- **OpenCV** for image processing capabilities
 
-### Photo Morph Detection
-```python
-from photo_morph_detector import PhotoMorphDetector
+## Contact
 
-detector = PhotoMorphDetector()
-result = detector.detect_morph("image.jpg")
-
-if result['success']:
-    print(f"Prediction: {result['prediction']}")
-    print(f"Morph Percentage: {result['morph_percentage']}%")
-    print(f"Real Percentage: {result['real_percentage']}%")
-    print(f"Certainty: {result['certainty']}")
-
-    # Component analysis scores
-    for component, score in result['component_scores'].items():
-        print(f"{component}: {score:.1f}%")
-```
-
-## Configuration ⚙️
-
-### Model Paths
-Models are stored in the `models/` directory:
-- `models/yolo/` - YOLO object detection
-- `models/inpainting/` - Stable Diffusion inpainting
-- `models/ai_detector/` - AI image detection
-
-### Customization
-Each module accepts various parameters:
-
-**Smart Cropping:**
-- `confidence_threshold`: Object detection confidence (default: 0.5)
-- `padding_color`: RGB color for padding (default: white)
-
-**Outpainting:**
-- `extension_factor`: How much to extend (default: 1.5)
-- `num_inference_steps`: Quality vs speed (default: 20)
-- `guidance_scale`: How closely to follow prompt (default: 7.5)
-
-**Text Overlay:**
-- `font_size`, `font_family`, `font_color`
-- `placement`: 'auto', 'center', 'top', 'bottom', etc.
-- `behind_subject`: Place text behind detected subjects
-
-## System Requirements 💻
-
-- **Python 3.9+**
-- **RAM:** 8GB+ recommended (4GB minimum)
-- **Storage:** 5GB for models
-- **GPU:** Optional but recommended for faster processing
-
-### GPU Support
-The tool automatically detects and uses GPU if available:
-- NVIDIA GPU with CUDA support recommended
-- Falls back to CPU if no GPU detected
-
-## File Structure 📁
-
-```
-smart-image-prep/
-├── requirements.txt          # Dependencies
-├── download_models.py        # Model download script
-├── utils.py                  # Utility functions
-├── smart_crop.py            # Smart cropping module
-├── outpaint_image.py        # Outpainting module
-├── add_text_overlay.py      # Text overlay module
-├── ai_image_check.py        # AI detection module
-├── main.py                  # Main demo script
-├── models/                  # Downloaded models (created automatically)
-├── outputs/                 # Generated outputs
-└── README.md               # This file
-```
-
-## Troubleshooting 🔧
-
-### Common Issues
-
-1. **"Model not found" errors:**
-   ```bash
-   python download_models.py
-   ```
-
-2. **Out of memory errors:**
-   - Reduce image size before processing
-   - Use CPU instead of GPU for large images
-   - Reduce `num_inference_steps` for outpainting
-
-3. **Slow processing:**
-   - Ensure GPU is being used (check logs)
-   - Reduce image resolution
-   - Use smaller models if available
-
-### Performance Tips
-- Images are automatically resized for processing efficiency
-- GPU processing is 5-10x faster than CPU
-- Batch processing is more efficient for multiple images
-
-## Examples 📸
-
-Check the `examples/` directory (created after running demo) for:
-- Input images
-- Cropped outputs
-- Outpainted results
-- Text overlay examples
-- AI detection results
-
-## Contributing 🤝
-
-Feel free to:
-- Report bugs and issues
-- Suggest new features
-- Submit improvements
-- Add support for new models
-
-## License 📄
-
-This project uses various open-source models and libraries. Please check individual model licenses:
-- YOLOv8: AGPL-3.0
-- Stable Diffusion: CreativeML Open RAIL-M
-- Transformers: Apache 2.0
-
-## Acknowledgments 🙏
-
-- **Ultralytics** for YOLOv8
-- **Stability AI** for Stable Diffusion
-- **Hugging Face** for model hosting and transformers
-- **OpenAI** for inspiration from DALL-E outpainting
+For issues, questions, or contributions, please open an issue on GitHub.
 
 ---
 
-**Happy image preparation! 🎨✨**
+**Note**: Model files are not included in the repository due to size constraints. They will be automatically downloaded on first run or can be downloaded manually from Hugging Face.
